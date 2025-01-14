@@ -1,9 +1,13 @@
 ---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import '@fontsource-variable/onest';
 interface Props {
 	title: string;
+	description: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -17,35 +21,51 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<div class="background"></div>
+		<Header />
+		<main class="flex-grow">
 		<slot />
+	</main>
+		<Footer />
 	</body>
 </html>
 <style is:global>
+	::selection {
+  background-color: #63e; /* Color de fondo del texto seleccionado */
+  color: #ffffff; /* Color del texto seleccionado */
+}
 	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+		color-scheme: light dark;
 	}
 	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
+		
+		font-family: "Onest Variable", system-ui, sans-serif;
+		scroll-behavior: smooth;
+		height: 100%;
 	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+	body {
+		background: #050505;
+		display: flex;
+		flex-direction: column;
+		min-height: 150vh;
+		
+	}
+	footer {
+		background: transparent;
+	}
+	.background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: -10;
+		background: radial-gradient(125% 125% at 50% 20%, #000 45%, #63e 90%);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
 	}
 </style>

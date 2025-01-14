@@ -1,0 +1,102 @@
+---
+import ProjectItem from "./ProjectItem.astro"
+
+const PROJECT = [
+  
+{
+        date: "Currently working on",
+        title:"R3STATE",
+        description:"Aplicación de gestión de empresas inmobiliarias.",
+        link: "",
+        disabled: true,
+        linkName: "No disponible",
+        technologies: [
+      { name: 'NextJS', icon: '/icons/nextjs.svg' },
+      { name: 'JavaScript', icon: '/icons/javascript.svg' },
+      { name: 'HTML', icon: '/icons/react.svg' },
+      { name: 'CSS', icon: '/icons/react.svg' },
+      { name: 'TailWind', icon: '/icons/react.svg' },
+      { name: 'PHP', icon: '/icons/react.svg' },
+      { name: 'Symfony', icon: '/icons/react.svg' },
+      { name: 'Doctrine', icon: '/icons/react.svg' },
+      { name: 'Arquitectura Hexagonal', icon: '/icons/react.svg' },
+
+    ]
+    },
+    {
+        date: "Released on August 2th, 2024",
+        title:"Portfolio",
+        description:"Un portfolio básico para darme a conocer profesionalmente, se irá actualizando conforme mi carrera profesional avance.",
+        link: "",
+        disabled: true,
+        linkName: "¡Ya estás aquí!",
+        technologies: [
+      { name: 'Astro', icon: '/icons/javascript.svg' },
+      { name: 'JavaScript', icon: '/icons/javascript.svg' },
+      { name: 'HTML', icon: '/icons/react.svg' },
+      { name: 'CSS', icon: '/icons/react.svg' },
+      { name: 'TailWind', icon: '/icons/react.svg' }
+
+    ]
+    },
+    {
+        date: "Released on July 25th, 2024",
+        title:"Blurify",
+        description:"Aplicación de edición de imágenes de manera sencilla y eficiente, creada con el propósito de adquirir nuevas habilidades.",
+        link: "https://blurify.es",
+        disabled: false,
+        linkName: "Acceder...",
+        technologies: [
+      { name: 'JavaScript', icon: '/icons/javascript.svg' },
+      { name: 'NextJS', icon: '/icons/react.svg' },
+      { name: 'Express', icon: '/icons/react.svg' },
+      { name: 'API Rest', icon: '/icons/react.svg' },
+      { name: 'MongoDB', icon: '/icons/react.svg' },
+      { name: 'Python', icon: '/icons/react.svg' },
+      { name: 'Flask', icon: '/icons/react.svg' },
+      { name: 'JWT', icon: '/icons/react.svg' },
+      { name: 'OpenCV', icon: '/icons/react.svg' },
+      { name: 'MTCNN tensorflow', icon: '/icons/react.svg' },
+      { name: 'Mongoose', icon: '/icons/react.svg' },
+      { name: 'Portainer', icon: '/icons/react.svg' },
+      { name: 'HTML', icon: '/icons/react.svg' },
+      { name: 'CSS', icon: '/icons/react.svg' },
+      { name: 'TailWind', icon: '/icons/react.svg' },
+      
+      
+
+    ]
+    },
+    {
+        date: "Released on May 30th, 2024",
+        title:"LoL History",
+        description:"Proyecto personal, relacionando mis pasatiempos y las tecnologías.",
+        link: "https://blurify.es",
+        disabled: true,
+        linkName: "No disponible",
+        technologies: [
+      { name: 'JavaScript', icon: '/icons/javascript.svg' },
+      { name: 'React', icon: '/icons/react.svg' },
+      { name: 'MySQL', icon: '/icons/react.svg' },
+      { name: 'Express', icon: '/icons/react.svg' },
+      { name: 'Prisma', icon: '/icons/react.svg' },
+      { name: 'API Rest', icon: '/icons/react.svg' },
+      { name: 'Web Scraping', icon: '/icons/react.svg' },
+      { name: 'HTML', icon: '/icons/react.svg' },
+      { name: 'CSS', icon: '/icons/react.svg' },
+      { name: 'TailWind', icon: '/icons/react.svg' },
+    ]
+    }
+]
+---
+<ol class="relative border-s border-gray-200 dark:border-gray-700">                  
+   {
+    PROJECT.map((project) => (
+        <li class="mb-10 ms-4">
+            <ProjectItem { ...project} />
+        </li>
+    ))
+   }
+   
+</ol>
+

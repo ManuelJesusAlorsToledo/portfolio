@@ -1,15 +1,21 @@
 {
-  "name": "zapping-zenith",
+  "name": "project",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.12.3"
+    "@astrojs/tailwind": "^5.1.0",
+    "@fontsource-variable/onest": "^5.0.4",
+    "@fontsource/onest": "^5.0.4",
+    "@iconify-json/mdi": "^1.2.1",
+    "astro": "^4.12.3",
+    "astro-icon": "^1.1.1",
+    "tailwindcss": "^3.4.7"
   }
 }

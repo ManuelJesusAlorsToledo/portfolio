@@ -1,0 +1,27 @@
+# Usa una imagen de Node.js ligera
+FROM node:18-alpine AS builder
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia los archivos de dependencias y los instala
+COPY package*.json ./
+RUN npm install
+
+# Copia el código fuente de la aplicación al contenedor
+COPY . .
+
+# Construye la aplicación para producción
+RUN npm run build
+
+# Usa una imagen más ligera para el entorno de producción
+FROM nginx:stable-alpine
+
+# Copia los archivos estáticos generados en la etapa de construcción al contenedor de Nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Exponer el puerto 80 para el servidor Nginx
+EXPOSE 80
+
+# Comando para iniciar Nginx en primer plano
+CMD ["nginx", "-g", "daemon off;"]

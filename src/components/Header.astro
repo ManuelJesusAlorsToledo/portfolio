@@ -1,0 +1,122 @@
+---
+import { Icon } from "astro-icon/components";
+
+const navItems = [
+  { href: "#top", text: "Inicio", icon: "mdi:home" },
+  { href: "#proyectos", text: "Proyectos", icon: "mdi:briefcase" },
+  { href: "#sobre-mi", text: "Sobre mí", icon: "mdi:account" },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full py-3">
+    <!-- Header original para pantallas grandes -->
+    <div class="hidden md:block shadow-lg p-2 rounded-full bg-gray-500 bg-opacity-95 md:space-x-8">
+        <nav class="px-2 flex items-center gap-4">
+            {navItems.map(({ href, text, icon }) => (
+                <a
+                    href={href}
+                    id={`nav-${href.substring(1)}`}
+                    class="cursor-pointer flex gap-2 nav-link text-white hover:text-gray-300 items-center px-3 py-2 rounded-md text-md font-medium transition duration-300 ease-in-out hover:shadow-md hover:bg-gray-600"
+                >
+                    <Icon name={icon} width="24" height="24" />
+                    <span>{text}</span>
+                </a>
+            ))}
+        </nav>
+    </div>
+
+    <!-- Botón de menú para móviles -->
+    <div class="md:hidden">
+        <button id="mobile-menu-button" class="p-2 rounded-full bg-gray-500 bg-opacity-95 text-white">
+            <Icon name="mdi:menu" width="24" height="24" id="menu-icon" />
+            <Icon name="mdi:close" width="24" height="24" id="close-icon" class="hidden" />
+        </button>
+    </div>
+</header>
+
+<!-- Menú móvil -->
+<div id="mobile-menu" class="fixed top-16 left-0 right-0 z-40 hidden md:hidden">
+    <div class="bg-gray-500 bg-opacity-50 backdrop-blur-md shadow-lg">
+        <nav class="flex flex-col items-center py-4">
+            {navItems.map(({ href, text, icon }) => (
+                <a
+                    href={href}
+                    class="cursor-pointer flex gap-2 nav-link text-white hover:text-gray-300 items-center px-3 py-2 rounded-md text-md font-medium transition duration-300 ease-in-out hover:shadow-md hover:bg-gray-600 w-full text-center"
+                >
+                    <Icon name={icon} width="20" height="20" />
+                    <span>{text}</span>
+                </a>
+            ))}
+        </nav>
+    </div>
+</div>
+
+<script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+    });
+
+    // Cerrar el menú al hacer clic en un enlace
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        });
+    });
+
+    function updateActiveNavItem() {
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('header nav a, #mobile-menu nav a');
+
+        let currentSectionId = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= sectionTop - 100) {
+                currentSectionId = section.id;
+            }
+        });
+
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${currentSectionId}`) {
+                item.classList.add('active');
+            }
+        });
+    }
+
+    document.addEventListener('scroll', updateActiveNavItem);
+    document.addEventListener('astro:page-load', updateActiveNavItem);
+    updateActiveNavItem();
+</script>
+
+<style>
+    .active {
+        @apply shadow-md bg-gray-600;
+    }
+
+    #mobile-menu {
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    #mobile-menu:not(.hidden) {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #mobile-menu .backdrop-blur-md {
+        backdrop-filter: blur(8px);
+    }
+</style>
